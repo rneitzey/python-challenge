@@ -1,8 +1,9 @@
 import os
 import csv
 import statistics
+import sys
 
-budget_csv = os.path.join('..','Resources','budget_data.csv')
+budget_csv = os.path.join('Resources','budget_data.csv')
 
 with open(budget_csv,newline='') as csvfile:
     csvreader = csv.reader(csvfile,delimiter = ',')
@@ -51,14 +52,13 @@ print(f"Average Change: ${average_change}")
 print(f"Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})")
 print(f"Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})")
 
-
 with open("Results_summary.txt","w+") as summary:
-    summary.write("Financial Analysis" + '\n')
-    summary.write("-" * 20 + '\n')
-    summary.write(f"Total Months: {row_count}" + '\n')
-    summary.write(f"Total: ${net}" + '\n')
-    summary.write(f"Average Change: ${average_change}" + '\n')
-    summary.write(f"Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})" + '\n')
-    summary.write(f"Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})" + '\n')
-
-summary.close()
+    sys.stdout = summary
+#Print to text file
+    print("Financial Analysis")
+    print("-" * 20)
+    print(f"Total Months: {row_count}")
+    print(f"Total: ${net}")
+    print(f"Average Change: ${average_change}")
+    print(f"Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})")
+    print(f"Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})")
