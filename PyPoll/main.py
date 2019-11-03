@@ -1,6 +1,7 @@
 import os
 import csv
 import statistics
+import sys
 
 election_csv = os.path.join('Resources','election_data.csv')
 
@@ -25,5 +26,31 @@ print("-" * 20)
 print (f"Total Votes: {voter_count}")
 print("-" * 20)
 
+max_votes = 0
+winner = ""
 for candidate,votes in candidate_info.items():
     print(f"{candidate}: {round((votes/voter_count*100),3)}% ({votes})")
+    if votes > max_votes:
+        max_votes = votes
+        winner = candidate
+print("-" * 20)
+print(f"Winner: {winner}")
+print("-" * 20)
+
+with open("vote_summary.txt","w+") as summary:
+    sys.stdout = summary
+#Print to text file
+    print("Election results")
+    print("-" * 20)
+    print (f"Total Votes: {voter_count}")
+    print("-" * 20)
+    max_votes = 0
+    winner = ""
+    for candidate,votes in candidate_info.items():
+        print(f"{candidate}: {round((votes/voter_count*100),3)}% ({votes})")
+        if votes > max_votes:
+            max_votes = votes
+            winner = candidate
+    print("-" * 20)
+    print(f"Winner: {winner}")
+    print("-" * 20)
